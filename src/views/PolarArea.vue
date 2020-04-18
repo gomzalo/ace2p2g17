@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <h3>Polar Area Chart Example in Vue</h3>
     <polar-area-chart></polar-area-chart>
   </div>

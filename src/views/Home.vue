@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <h3>Line Chart Example in Vue</h3>
     <line-chart></line-chart>
   </div>

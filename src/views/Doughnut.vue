@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <h3>Doughnut Chart Example in Vue</h3>
     <doughnut-chart></doughnut-chart>
   </div>
