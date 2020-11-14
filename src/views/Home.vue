@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h3>Line Chart Example in Vue</h3>
+    <h3>Temperatura de las personas que han pasado por la estación</h3>
     <line-chart></line-chart>
   </div>
 </template>
 
 <script>
 import LineChart from '@/components/LineChart'
-
+console.log("userlist")
 export default {
   components: {
     LineChart

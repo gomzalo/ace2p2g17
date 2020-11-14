@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Bar Chart Example in Vue</h3>
+    <h3>Tiempo que tardan las personas en el lugar</h3>
     <bar-chart></bar-chart>
   </div>
 </template>

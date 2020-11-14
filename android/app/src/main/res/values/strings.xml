@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ace2_2p_g17</string>
+    <string name="title_activity_main">ace2_2p_g17</string>
+    <string name="package_name">io.ionic.starter</string>
+    <string name="custom_url_scheme">io.ionic.starter</string>
+</resources>
