@@ -1,6 +1,5 @@
 
 // :::::::::::::::::::::::::::::::::::::::::::::::		TEMPERATURA		 :::::::::::::::::::::::::::::::::::::::::::::::
-
 ###
 
 POST https://apirestp2ace2.herokuapp.com/temperatura HTTP/1.1
@@ -8,7 +7,7 @@ content-type: application/json
 
 
 {
-	"temperatura":35
+	"temperatura": 35
 }
 
 ###
@@ -17,3 +16,18 @@ GET https://apirestp2ace2.herokuapp.com/temperatura HTTP/1.1
 content-type: application/json
 
 // :::::::::::::::::::::::::::::::::::::::::::::::		TIEMPO		 :::::::::::::::::::::::::::::::::::::::::::::::
+###
+
+POST https://apirestp2ace2.herokuapp.com/dato HTTP/1.1
+content-type: application/json
+
+
+{
+	"id": "55",
+    "tiempo": 5
+}
+
+###
+
+GET https://apirestp2ace2.herokuapp.com/dato HTTP/1.1
+content-type: application/json
