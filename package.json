@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node /router/index.js"
+    "start": "node main.js"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.2",
