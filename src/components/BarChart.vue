@@ -36,7 +36,7 @@
       this.renderChart(this.chartData, this.options)
     },
     created() {
-      axios.get(`https://apirestp2ace2.herokuapp.com/dato`)
+      axios.get(`https://apirestp2ace2.herokuapp.com/dato?fecha=11/14/2020`)
         .then(response => {
           // JSON responses are automatically parsed.
           console.log(response)

@@ -38,7 +38,7 @@ export default {
       this.renderChart(this.chartData)
     },
     created() {
-      axios.get(`https://apirestp2ace2.herokuapp.com/temperatura`)
+      axios.get(`https://apirestp2ace2.herokuapp.com/tentemp`)
         .then(response => {
           // JSON responses are automatically parsed.
           
