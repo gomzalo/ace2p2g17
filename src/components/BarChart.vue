@@ -1,12 +1,14 @@
 <script>
   import { Bar, mixins } from 'vue-chartjs'
   import axios from 'axios'
+  // import Datepicker from 'vuejs-datepicker'
 
   export default {
     mixins: [mixins.reactiveData],
     data() {
       return {
         chartData: '',
+        fecha: '',
         options: {
           scales: {
             yAxes: [{
@@ -36,14 +38,15 @@
       this.renderChart(this.chartData, this.options)
     },
     created() {
-      axios.get(`https://apirestp2ace2.herokuapp.com/dato?fecha=11/14/2020`)
+      axios.get(`https://apirestp2ace2.herokuapp.com/dato?fecha=11/15/2020`)
         .then(response => {
           // JSON responses are automatically parsed.
           console.log(response)
           const responseData = response.data
           // console.log(responseData[0].tiempo)
           // console.log(response.data[0].temperatura)
-        
+          // this.value = this.$refs.datepicker.pickedValue
+          // console.log(this.value)
           this.chartData  = 
           // responseData.temperatura
           {            
@@ -56,7 +59,7 @@
             datasets: [
               {
                 label: 'Tiempo en minutos',
-                backgroundColor: '#f87979',
+                backgroundColor: '#2a466e',
                 data: responseData.map(item => item.tiempo)
               }
             ]
@@ -65,6 +68,6 @@
         .catch(e => {
           this.errors.push(e)
         })
-  }
+    }
   }
 </script>

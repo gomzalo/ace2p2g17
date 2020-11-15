@@ -6,9 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node .",
-    "heroku-postinstall": "npm install && npm run serve" 
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.2",
@@ -16,9 +14,14 @@
     "axios": "^0.21.0",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
+    "ion-datepicker": "^2.8.2",
+    "luxon": "^1.25.0",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
-    "vue-router": "^3.1.6"
+    "vue-datetime": "^1.0.0-beta.14",
+    "vue-router": "^3.1.6",
+    "vuejs-datepicker": "^1.6.2",
+    "weekstart": "^1.0.1"
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.2",

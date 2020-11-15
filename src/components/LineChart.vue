@@ -43,7 +43,7 @@ export default {
           // JSON responses are automatically parsed.
           
           const responseData = response.data
-          console.log(responseData[0].temperatura)
+          console.log(responseData[0])
           // console.log(response.data[0].temperatura)
         
           this.chartData  = 
@@ -58,7 +58,7 @@ export default {
             datasets: [
               {
                 label: 'Temperatura en grados',
-                backgroundColor: '#f87979',
+                backgroundColor: '#280038',
                 data: responseData.map(item => item.temperatura)
               }
             ]
