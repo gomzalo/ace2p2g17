@@ -4,8 +4,8 @@
     <datepicker placeholder="Elige una fecha" 
     :value='fecha' :language="es" format='MM-dd-yyyy' @selected="CallDateFunction"></datepicker>
     
-    <bar-chart></bar-chart>
-    <table id="tableTemp">
+    <bar-chart :chart-data="chartData"></bar-chart>
+    <table id="tableTempT">
       <thead class="thead-dark">
                     <tr>
                         <th>#</th>
@@ -25,45 +25,170 @@
 <script>
 import BarChart from '@/components/BarChart'
 import Datepicker from 'vuejs-datepicker'
+import { Bar, mixins } from 'vue-chartjs'
 import axios from 'axios'
 import { es } from 'vuejs-datepicker/dist/locale'
 
 export default {
+  mixins: [mixins.reactiveData],
   components: {
-    BarChart, Datepicker
+    BarChart,
+    Datepicker
   },
-   el: "#tableTemp",
+  el: "#tableTempT",
+  
   data () {
     return {
       tiempos: [],
-      format: "d MMMM yyyy",
+      chartData: '',
+      format: "MMMM d yyyy",
       es: es,
-      fecha : ''
+      fecha : '',
+      options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              gridLines: {
+                display: true
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                display: false
+              }
+            }]
+          },
+          legend: {
+            display: true
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        },
     }       
   },
-  mounted: function() {
+  extends: Bar,
+  mounted() {
+    this.fillData()
+    this.renderChart(this.chartData) 
+    this.watch()
+    // console.log(tiemposURL)
+  },
+  created(){
+    this.renderChart(this.chartData) 
+    this.fillData()
+  },
+  watch(){
+    this.$data._chart.update();
+  },
+  methods: {
+      reload() {
+      this.$forceUpdate()
+      },
+      CallDateFunction (value) {
+      console.log("updating datepicker value");
+// -- Formato a fecha
+      this.$fechaElegida = this.formatDate(value)
+      console.log(this.$fechaElegida)
+      // console.log(value)
+      this.fecha = value;
+      // fecha
+      this.fillData()
+      this.renderChart(this.chartData)
+      this.watch()
+      this.$forceUpdate()
+    },
+    formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [month, day, year].join('/');
+    },
+    fillData(){
+      var tiemposURL = `https://apirestp2ace2.herokuapp.com/dato?fecha=`
+       
+    if(this.$fechaElegida == null){
+      tiemposURL += `11/15/2020`
     axios
-      .get(`https://apirestp2ace2.herokuapp.com/dato?fecha=11/15/2020`)
+      .get(tiemposURL)
         .then(response => {
           // JSON responses are automatically parsed.
           
           this.tiempos = response.data
-          
+          const responseData = response.data
+          console.log(responseData.length)
+          if(responseData.length < 1){
+            alert('No hay datos en la fecha seleccionada')
+          }
+          this.chartData  = 
+          // responseData.temperatura
+          {            
+
+            // labels: responseData.map(item => item.id),
+            labels: ["1",	"2",	"3",	"4",	"5",	"6",	"7", "8", "9", "10"],
+            
+            // data: responseData.map(item => item.id),
+
+            datasets: [
+              {
+                label: 'Tiempo en minutos',
+                backgroundColor: '#2a466e',
+                data: responseData.map(item => item.tiempo)
+              }
+            ]
+          }
           // console.log(response.data[0].temperatura)
         
         })
         .catch(e => {
           this.errors.push(e)
         })
-  },
-  methods: {
-    CallDateFunction (value) {
-      console.log("updating datepicker value");
-      this.$fechaElegida = String(value).format('MM/DD/YY')
-      console.log(this.$fechaElegida)
-      // console.log(value)
-      this.fecha = value;
-      
+    } else {
+      tiemposURL += this.$fechaElegida
+      axios
+      .get(tiemposURL)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          
+          this.tiempos = response.data
+          const responseData = response.data
+          console.log(responseData.length)
+          if(responseData.length < 1){
+            alert('No hay datos en la fecha seleccionada')
+          }
+          this.chartData  = 
+          // responseData.temperatura
+          {            
+
+            // labels: responseData.map(item => item.id),
+            labels: ["1",	"2",	"3",	"4",	"5",	"6",	"7", "8", "9", "10"],
+            
+            // data: responseData.map(item => item.id),
+
+            datasets: [
+              {
+                label: 'Tiempo en minutos',
+                backgroundColor: '#2a466e',
+                data: responseData.map(item => item.tiempo)
+              }
+            ]
+          }
+          // console.log(response.data[0].temperatura)
+        
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+      }
+      console.log("url from bar.vue" + tiemposURL)
     }
   }
 }
